@@ -1,9 +1,9 @@
 name: HungerGames
-main: tk.shanebee.hg.HG
-authors: [bob7l, Spoopy, ShaneBee]
+main: com.coleseverson.hg.HG
+authors: [bob7l, Spoopy, ShaneBee, ColeSeverson]
 description: A Simple, fun, PvP arena plugin
 version: '${project.version}'
-website: https://bitbucket.org/ShaneBeeStudios/hungergames
+website: https://github.com/ColeSeverson/HungerGames
 api-version: '1.13'
 softdepend: [Multiverse-Core, MultiWorld, Vault, My_Worlds, GoldenEnchants, mcMMO, MythicMobs, PlaceholderAPI, XConomy]
 
