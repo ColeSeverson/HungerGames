@@ -196,7 +196,7 @@ public class HG extends JavaPlugin {
 		cmds.put("debug", new DebugCmd());
 		cmds.put("list", new ListCmd());
 		cmds.put("listgames", new ListGamesCmd());
-		cmds.put("forcestart", new StartCmd());
+		cmds.put("forcestart", new ForceStartCmd());
 		cmds.put("stop", new StopCmd());
 		cmds.put("toggle", new ToggleCmd());
 		cmds.put("setexit", new SetExitCmd());
@@ -206,6 +206,7 @@ public class HG extends JavaPlugin {
 		cmds.put("bordersize", new BorderSizeCmd());
 		cmds.put("bordercenter", new BorderCenterCmd());
 		cmds.put("bordertimer", new BorderTimerCmd());
+		cmds.put("start", new StartCmd());
 		if (Config.spectateEnabled) {
 			cmds.put("spectate", new SpectateCmd());
 		}
