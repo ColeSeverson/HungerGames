@@ -34,6 +34,7 @@ public enum PotionTypeUtils {
     LUCK("LUCK"),
     TURTLE_MASTER("TURTLE_MASTER"),
     SLOW_FALLING("SLOW_FALLING");
+    
 
     private final String bukkit;
     private static final Map<String, String> BY_NAME = new HashMap<>();
@@ -110,13 +111,10 @@ public enum PotionTypeUtils {
      * @return New PotionData if checks passed
      */
     @Nullable
-    public static PotionData getPotionData(String data) {
+    public static PotionType getPotionData(String data) {
         String[] potionData = data.split(":");
         if (potionData.length == 1) {
             String pData = potionData[0].toUpperCase(Locale.ROOT);
-            boolean strong = potionData[0].startsWith("STRONG_");
-            boolean extended = potionData[0].startsWith("LONG_");
-            pData = pData.replace("STRONG_", "").replace("LONG_", "");
             PotionType potionType = get(pData);
             if (potionType == null) {
                 Util.warning("Potion base type not found: &c" + potionData[0].toUpperCase(Locale.ROOT) + " &ein: &b" + data);
@@ -126,38 +124,8 @@ public enum PotionTypeUtils {
                 Util.warning("      &bpotion-base:LONG_TURTLE_MASTER");
                 Util.warning("      &bpotion-base:strong_turtle_master");
                 return null;
-            } else if (extended && !potionType.isExtendable()) {
-                Util.warning("Potion can not be extended: &b" + data);
-                return null;
-            } else if (strong && !potionType.isUpgradeable()) {
-                Util.warning("Potion can not be upgraded: &b" + data);
-                return null;
             }
-            return new PotionData(potionType, extended, strong);
-        } else if (potionData.length == 3) {
-            PotionType potionType = get(potionData[0]);
-            if (potionType == null) {
-                potionTypeWarning("Potion base type not found: &c" + potionData[0].toUpperCase(Locale.ROOT) + " &ein: &b" + data);
-                return null;
-            } else if (!Util.isBool(potionData[1])) {
-                potionTypeWarning("Not a valid boolean: &c" + potionData[1].toUpperCase(Locale.ROOT) + " &ein: &b" + data);
-                return null;
-            } else if (!Util.isBool(potionData[2])) {
-                potionTypeWarning("Not a valid boolean: &c" + potionData[2].toUpperCase(Locale.ROOT) + " &ein: &b" + data);
-                return null;
-            } else if (Boolean.parseBoolean(potionData[1]) && !potionType.isUpgradeable()) {
-                Util.warning("Potion can not be upgraded: &b" + data);
-                return null;
-            } else if (Boolean.parseBoolean(potionData[2]) && !potionType.isExtendable()) {
-                Util.warning("Potion can not be extended: &b" + data);
-                return null;
-            } else if (Boolean.parseBoolean(potionData[1]) && Boolean.parseBoolean(potionData[2])) {
-                Util.warning("Potion can not be both upgraded and extended in: &b" + data);
-                return null;
-            }
-            boolean upgraded = Boolean.parseBoolean(potionData[1]);
-            boolean extended = Boolean.parseBoolean(potionData[2]);
-            return new PotionData(potionType, extended, upgraded);
+            return potionType;
         } else {
             potionTypeWarning("Improper setup of potion-data: &c");
             return null;

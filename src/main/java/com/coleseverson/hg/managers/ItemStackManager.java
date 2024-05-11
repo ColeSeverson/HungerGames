@@ -21,6 +21,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
+import org.bukkit.potion.PotionType;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -165,9 +166,9 @@ public class ItemStackManager {
                 }
             } else if (s.startsWith("potion-base:") && itemMeta instanceof PotionMeta) {
                 s = s.replace("potion-base:", "");
-                PotionData potionData = PotionTypeUtils.getPotionData(s);
+                PotionType potionData = PotionTypeUtils.getPotionData(s);
                 if (potionData != null) {
-                    ((PotionMeta) itemMeta).setBasePotionData(potionData);
+                    ((PotionMeta) itemMeta).setBasePotionType(potionData);
                 }
             } else if (s.startsWith("data:")) {
                 s = s.replace("data:", "").replace("~", " ");
